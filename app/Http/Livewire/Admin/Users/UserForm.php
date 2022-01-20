@@ -46,7 +46,7 @@ class UserForm extends Component
          'name' => $this->name,
          'email' => $this->email,
          'password' => Hash::make($this->password),
-         'institution' => $this->institution,
+         'id_pt' => $this->institution,
          'role_id' => $this->role_id,
          'student_address' => $this->student_address,
          'student_licence_number' => $this->student_licence_number,

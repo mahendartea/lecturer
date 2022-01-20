@@ -73,7 +73,7 @@
   @endif
 
 
-  <div class="my-5 bg-white p-10 rounded-lg shadow-xl">
+  <div class="my-5 bg-white p-10 rounded-xl shadow-xl">
     @switch($coursePage)
     @case(1)
     <livewire:teacher.courses.history-courses />

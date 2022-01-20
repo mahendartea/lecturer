@@ -17,12 +17,11 @@ class CreateCoursesTable extends Migration
          $table->id();
          $table->string('code_course');
          $table->string('name_course');
-         $table->foreignId('course_years_id')->unsigned();
+         $table->foreignId('course_year_id')->unsigned();
          $table->foreignId('user_id')->unsigned();
          $table->foreignId('prodi_id')->unsigned();
          $table->string('class');
-//         $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-//         $table->foreign('prodi_id')->references('kode_prodi')->on('study_programs')->onDelete('cascade');
+         $table->foreign('course_years_id')->references('id')->on('course_years');
          $table->timestamps();
       });
    }

@@ -9,17 +9,19 @@ use Livewire\Component;
 
 class HistoryCourses extends Component
 {
-   public $courseYearActive = 1;
+    public $courseYearActive = 1;
 
-   public function render()
-   {
-      $cekIdYear = Course::orderBy('id', 'desc')->where('user_id', Auth::id())->take(1)->get();
+    public function render()
+    {
+        $queryData = CourseYear::where('user_id', Auth::id())->orderBy('id', 'desc');
+        $data = [
+            'CourseYears' => $queryData->get(),
+        ];
+        return view('livewire.teacher.courses.history-courses', ['CourseHis' => $data['CourseYears']]);
+    }
 
-      $this->courseYearActive = $cekIdYear[0]->id;
-
-      $data = [
-         'CourseYears' => CourseYear::where('user_id', Auth::id())->orderBy('id','desc')->get(),
-      ];
-      return view('livewire.teacher.courses.history-courses', ['CourseHis' => $data['CourseYears'], 'idYear' => $this->courseYearActive]);
-   }
+    public function toChangeCourseYearValue($id)
+    {
+        $this->courseYearActive = $id;
+    }
 }
