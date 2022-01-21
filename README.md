@@ -70,11 +70,11 @@ a. Menu Perkuliahan
 
 1. Riwayat Mengajar
    
-   - [ ] Semester / Tahun
+   - [x] Semester / Tahun
 
 2. Matakuliah Diampu
    
-   - [ ] Semester / Tahun
+   - [x] Semester / Tahun
    - [ ] Peserta
    - [ ] Absensi
    - [ ] Berita Acara

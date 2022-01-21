@@ -23,6 +23,8 @@
     "tailwindcss": "^2.0.1"
   },
   "dependencies": {
-    "daisyui": "^1.24.3"
+    "@prettier/plugin-php": "^0.17.6",
+    "daisyui": "^1.24.3",
+    "prettier": "^2.5.1"
   }
 }
