@@ -12,12 +12,7 @@ class CourseYear extends Model
 {
    use HasFactory;
 
-   protected $fillable = [
-      'semester',
-      'year',
-      'ket_tahun_ajar',
-      'user_id',
-   ];
+   protected $guarded = [];
 
    public function course()
    {

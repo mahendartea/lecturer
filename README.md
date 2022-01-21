@@ -233,7 +233,7 @@ c. Forum
    
    3. name_course *(string)*
    
-   4. course_years_id *(string - constrained dengan table course_years)*
+   4. course_year_id *(string - constrained dengan table course_years)*
    
    5. user_id *(string - relasi dengan users)*
    

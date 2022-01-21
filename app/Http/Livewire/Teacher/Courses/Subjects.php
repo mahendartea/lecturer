@@ -28,7 +28,7 @@ class Subjects extends Component
         $year = CourseYear::where('id', $this->dataActive)->get();
 
         $data = [
-            'subjects' => $dataMakul->where('course_year_id',$this->dataActive)->paginate($this->paginate),
+            'subjects' => $dataMakul->where('course_year_id', $this->dataActive)->with('courseyear')->paginate($this->paginate),
             'year' => $year[0]
         ];
 
