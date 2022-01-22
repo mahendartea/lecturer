@@ -9,10 +9,10 @@ use Livewire\Component;
 class HistoryCourses extends Component
 {
   public $courseYearActive = 1;
-
   public $showFormAddYear = false;
-
   public $deleteStatus = true;
+  public $confirmingDeleteYear = false;
+  public $idYear;
 
   public $smt;
   public $tAjar;
@@ -63,7 +63,16 @@ class HistoryCourses extends Component
 
   public function deleteYear($id)
   {
-      $hapus = CourseYear::find($id)->delete();
-      session()->flash('message', 'Berhasil dihapus');
+    $this->idYear = $id;
+    $this->confirmingDeleteYear = true;
+  }
+
+  public function deleteYearNow($id)
+  {
+    $this->confirmingDeleteYear = false;
+
+    $hapus = CourseYear::find($id)->delete();
+    $this->deleteStatus = true;
+    session()->flash('message', 'Tahun Ajar Berhasil dihapus!!');
   }
 }
