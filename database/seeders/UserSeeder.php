@@ -24,13 +24,13 @@ class UserSeeder extends Seeder
          'student_address' => '',
          'role_id' => '1',
       ]);
-      DB::table('users')->insert([
-         'name' => 'Mahendar Dwi Pyana',
-         'email' => 'mahendar@uui.ac.id',
-         'password' => Hash::make('mahendar'),
-         'id_pt' => '1',
-         'student_address' => '',
-         'role_id' => '3',
-      ]);
+      // DB::table('users')->insert([
+      //    'name' => 'Mahendar Dwi Pyana',
+      //    'email' => 'mahendar@uui.ac.id',
+      //    'password' => Hash::make('mahendar'),
+      //    'id_pt' => '1',
+      //    'student_address' => '',
+      //    'role_id' => '3',
+      // ]);
    }
 }

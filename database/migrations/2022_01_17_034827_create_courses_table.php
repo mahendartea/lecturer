@@ -17,11 +17,11 @@ class CreateCoursesTable extends Migration
          $table->id();
          $table->string('code_course');
          $table->string('name_course');
-         $table->foreignId('course_year_id')->unsigned();
-         $table->foreignId('user_id')->unsigned();
-         $table->foreignId('prodi_id')->unsigned();
+         $table->unsignedBigInteger('course_year_id');
+         $table->unsignedBigInteger('user_id');
+         $table->unsignedBigInteger('prodi_id');
          $table->string('class');
-         $table->foreign('course_years_id')->references('id')->on('course_years');
+         $table->foreign('course_year_id')->references('id')->on('course_years')->onDelete('cascade');
          $table->timestamps();
       });
    }
@@ -33,6 +33,10 @@ class CreateCoursesTable extends Migration
     */
    public function down()
    {
-      Schema::dropIfExists('courses');
+      // Schema::dropIfExists('courses');
+      Schema::table('courses', function (Blueprint $table) {
+         $table->dropForeign(['course_year_id']);
+         $table->dropColumn(['course_year_id']);
+      });
    }
 }

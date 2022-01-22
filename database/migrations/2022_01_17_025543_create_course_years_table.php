@@ -19,7 +19,7 @@ class CreateCourseYearsTable extends Migration
       $table->string('semester');
       $table->string('year');
       $table->text('ket_tahun_ajar')->nullable();
-      $table->foreign('user_id')->references('id')->on('users');
+      $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
       $table->timestamps();
     });
   }
@@ -31,6 +31,9 @@ class CreateCourseYearsTable extends Migration
    */
   public function down()
   {
-    Schema::dropIfExists('course_years');
+    Schema::table('course_years', function (Blueprint $table) {
+      $table->dropForeign(['user_id']);
+      $table->dropColumn(['user_id']);
+    });
   }
 }

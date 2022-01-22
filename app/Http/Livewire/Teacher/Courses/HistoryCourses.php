@@ -69,10 +69,14 @@ class HistoryCourses extends Component
 
   public function deleteYearNow($id)
   {
-    $this->confirmingDeleteYear = false;
-
     $hapus = CourseYear::find($id)->delete();
     $this->deleteStatus = true;
-    session()->flash('message', 'Tahun Ajar Berhasil dihapus!!');
+    if ($hapus) {
+      session()->flash('message', 'Tahun ajar berhasil dihapus');
+    } else {
+      session()->flash('message', 'Tahun ajar gagal dihapus');
+    }
+
+    $this->confirmingDeleteYear = false;
   }
 }

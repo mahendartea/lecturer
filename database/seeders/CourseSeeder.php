@@ -18,9 +18,9 @@ class CourseSeeder extends Seeder
       [
         'code_course' => 'INF212',
         'name_course' => 'Mobile Programming',
-        'course_years_id' => '2',
-        'class'=> 'A',
-        'user_id' => 2,
+        'course_year_id' => '1',
+        'class' => 'A',
+        'user_id' => 1,
         'prodi_id' => '19291'
       ],
     );
