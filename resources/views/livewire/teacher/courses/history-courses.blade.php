@@ -2,7 +2,10 @@
     <div class="flex items-center space-x-5 mb-3">
         <p class="font-bold text-neutral uppercase">Perkuliahan</p>
         @if (session('message'))
-            <span class="bagde badge-sm badge-info">{{ session('message') }}</span>
+            <span class="bagde badge-sm badge-accent">{{ session('message') }}</span>
+        @endif
+        @if (session('error'))
+            <span class="bagde badge-sm badge-error">{{ session('error') }}</span>
         @endif
     </div>
     <div class="flex shadow-lg rounded-lg bg-gray-200">
@@ -33,11 +36,13 @@
                     </div>
                 </div>
             </div>
+
             <div class="pl-2 mt-5">
+
                 @if ($showFormAddYear)
                     <form wire:submit.prevent="store" class="border-b border-gray-500 mb-2">
                         @csrf
-                        <select wire:model="smt" class="select select-bordered w-full max-w-xs" id="smt">
+                        <select wire:model="smt" class="select select-bordered w-full max-w-xs text-gray-800" id="smt">
                             <option selected>Pilih</option>
                             <option value="Ganjil">Ganjil</option>
                             <option value="Genap">Genap</option>
@@ -88,11 +93,11 @@
     @if ($confirmingDeleteYear)
         <x-jet-dialog-modal wire:model="confirmingDeleteYear">
             <x-slot name="title">
-                {{ __('Delete Account') }}
+                {{ __('Apakah anda yakin?') }}
             </x-slot>
 
             <x-slot name="content">
-                {{ __('Apakah anda ingin menghapus Tahun Ajar ini? Hati-hati dalam menghapus tahun ajar ini, dikarenakan ada matakuliah yang berelasi dengan Tahun Ajar ini.') }}
+                {{ __('Apakah anda ingin menghapus Tahun Ajar ini? Hati-hati dalam menghapus tahun ajar, dikarenakan ada matakuliah yang berelasi dengan Tahun Ajar ini.') }}
 
             </x-slot>
 

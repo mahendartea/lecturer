@@ -8,75 +8,81 @@ use Livewire\Component;
 
 class HistoryCourses extends Component
 {
-  public $courseYearActive = 1;
-  public $showFormAddYear = false;
-  public $deleteStatus = true;
-  public $confirmingDeleteYear = false;
-  public $idYear;
+   public $courseYearActive = 1;
+   public $showFormAddYear = false;
+   public $deleteStatus = true;
+   public $confirmingDeleteYear = false;
+   public $idYear;
 
-  public $smt;
-  public $tAjar;
+   public $smt;
+   public $tAjar;
 
-  public function render()
-  {
-    $queryData = CourseYear::where('user_id', Auth::id())->orderBy('year', 'desc')->orderBy('semester', 'desc');
-    $data = [
-      'CourseYears' => $queryData->get(),
-    ];
-    return view('livewire.teacher.courses.history-courses', ['CourseHis' => $data['CourseYears']]);
-  }
+   public function render()
+   {
+      $queryData = CourseYear::where('user_id', Auth::id())->orderBy('year', 'desc')->orderBy('semester', 'desc');
+      $data = [
+         'CourseYears' => $queryData->get(),
+      ];
+      return view('livewire.teacher.courses.history-courses', ['CourseHis' => $data['CourseYears']]);
+   }
 
-  public function toChangeCourseYearValue($id)
-  {
-    $this->courseYearActive = $id;
-  }
+   public function toChangeCourseYearValue($id)
+   {
+      $this->courseYearActive = $id;
+   }
 
-  protected $rules = [
-    'tAjar' => 'required|date_format:Y|digits:4',
-    'smt' => 'required'
-  ];
+   protected $rules = [
+      'tAjar' => 'required|date_format:Y|digits:4',
+      'smt' => 'required'
+   ];
 
-  public function messages()
-  {
-    return [
-      'tAjar.required' => 'Harus input Tahun Ajar..',
-      'tAjar.date_format' => 'Harus angka tahun..',
-      'tAjar.digits' => 'Harus 4 digit..',
-      'smt.required' => 'Harus pilih Semester..'
-    ];
-  }
+   public function messages()
+   {
+      return [
+         'tAjar.required' => 'Harus input Tahun Ajar..',
+         'tAjar.date_format' => 'Harus angka tahun..',
+         'tAjar.digits' => 'Harus 4 digit..',
+         'smt.required' => 'Harus pilih Semester..'
+      ];
+   }
 
-  public function store()
-  {
-    $this->validate();
-    $yearadd = CourseYear::create([
-      'user_id' => Auth::id(),
-      'semester' => $this->smt,
-      'year' => $this->tAjar,
-      'ket_tahun_ajar' => $this->smt . ' ' . $this->tAjar . '/' . $this->tAjar + 1
-    ]);
+   public function store()
+   {
+      $cekDataDBYear = CourseYear::where('user_id', Auth::id())->where('year', $this->tAjar)->where('semester', $this->smt)->first();
 
-    $this->showFormAddYear = false;
+      if ($cekDataDBYear) {
+         session()->flash('error', 'Data Sudah Ada..');
+      } else {
+         $this->validate();
+         $yearadd = CourseYear::create([
+            'user_id' => Auth::id(),
+            'semester' => $this->smt,
+            'year' => $this->tAjar,
+            'ket_tahun_ajar' => $this->smt . ' ' . $this->tAjar . '/' . $this->tAjar + 1
+         ]);
 
-    session()->flash('message', 'Tahun ajar berhasil ditambahkan');
-  }
+         $this->showFormAddYear = false;
 
-  public function deleteYear($id)
-  {
-    $this->idYear = $id;
-    $this->confirmingDeleteYear = true;
-  }
+         session()->flash('message', 'Tahun ajar berhasil ditambahkan');
+      }
+   }
 
-  public function deleteYearNow($id)
-  {
-    $hapus = CourseYear::find($id)->delete();
-    $this->deleteStatus = true;
-    if ($hapus) {
-      session()->flash('message', 'Tahun ajar berhasil dihapus');
-    } else {
-      session()->flash('message', 'Tahun ajar gagal dihapus');
-    }
+   public function deleteYear($id)
+   {
+      $this->idYear = $id;
+      $this->confirmingDeleteYear = true;
+   }
 
-    $this->confirmingDeleteYear = false;
-  }
+   public function deleteYearNow($id)
+   {
+      $hapus = CourseYear::find($id)->delete();
+      $this->deleteStatus = true;
+      if ($hapus) {
+         session()->flash('message', 'Tahun ajar berhasil dihapus');
+      } else {
+         session()->flash('message', 'Tahun ajar gagal dihapus');
+      }
+
+      $this->confirmingDeleteYear = false;
+   }
 }
