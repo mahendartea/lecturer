@@ -8,10 +8,9 @@
             <thead>
                 <tr>
                     <th class="bg-neutral text-primary-content">No</th>
+                    <th class="bg-neutral text-primary-content">Kode MK</th>
                     <th class="bg-neutral text-primary-content">Nama Mata Kuliah</th>
-                    <th class="bg-neutral text-primary-content">Nama Kelas</th>
-                    <th class="bg-neutral text-primary-content">Peserta</th>
-                    <th class="bg-neutral text-primary-content">Action</th>
+                    <th class="bg-neutral text-primary-content">Kelas</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,13 +21,9 @@
                 @foreach ($subjects as $subject)
                     <tr>
                         <td class="py-2 text-neutral">{{ $no++ }}</td>
+                        <td class="text-neutral">{{ $subject->code_course }}</td>
                         <td class="text-neutral">{{ $subject->name_course }}</td>
                         <td class="text-neutral">{{ $subject->class }}</td>
-                        <td class="text-neutral">{{ 30 }}</td>
-                        <td class="">
-                            <a href="#" class="btn btn-primary btn-xs">Absen</a>
-                            <a href="#" class="btn btn-secondary btn-xs">Berita Acara</a>
-                        </td>
                     </tr>
                 @endforeach
             </tbody>

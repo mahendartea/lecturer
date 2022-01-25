@@ -8,7 +8,7 @@
             <span class="bagde badge-sm badge-error">{{ session('error') }}</span>
         @endif
     </div>
-    <div class="flex shadow-lg rounded-lg bg-gray-200">
+    <div class="flex shadow-md rounded-lg bg-gray-200">
         <div class="w-1/4 p-5 text-center">
             <div class="flex justify-between items-center mb-2">
                 <p class="font-bold text-neutral">Tahun Ajar</p>
@@ -61,28 +61,33 @@
                     </form>
                 @endif
 
-                @foreach ($CourseHis as $chis)
-                    <div class="my-1">
-                        <div class=" @if (!$deleteStatus) btn-group flex flex-auto justify-center w-full @endif">
-                            <button wire:click="toChangeCourseYearValue({{ $chis->id }})"
-                                class="btn btn-sm hover:bg-neutral-focus mx-0 text-center @if ($deleteStatus) w-full @else w-auto @endif text-xs cursor-pointer text-primary-content rounded-xs @if ($chis->id == $courseYearActive) bg-primary hover:bg-primary-focus @endif">
-                                {{ $chis->ket_tahun_ajar }}
-                            </button>
-                            @if (!$deleteStatus)
-                                <button wire:click="deleteYear({{ $chis->id }})"
-                                    class="btn btn-sm bg-red-500 text-xs">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-trash" viewBox="0 0 16 16">
-                                        <path
-                                            d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                                        <path fill-rule="evenodd"
-                                            d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-                                    </svg>
-                                </button>
-                            @endif
-                        </div>
-                    </div>
-                @endforeach
+                <div class="my-1 flex mx-auto">
+                    <ul class="menu w-64 py-3 border bg-base-100 rounded-box">
+                        @foreach ($CourseHis as $chis)
+                            <div class="@if (!$deleteStatus) flex items-center justify-between @endif">
+
+                                <li class=" @if ($chis->id == $courseYearActive) bordered @endif @if (!$deleteStatus) w-3/4 @else w-full @endif">
+                                    <button wire:click="toChangeCourseYearValue({{ $chis->id }})"
+                                        class=" text-xs cursor-pointer text-primary-content rounded-xs @if ($chis->id == $courseYearActive) hover:bg-indigo-200 bg-indigo-300 @endif">
+                                        {{ $chis->ket_tahun_ajar }}
+                                    </button>
+                                </li>
+                                @if (!$deleteStatus)
+                                    <button wire:click="deleteYear({{ $chis->id }})"
+                                        class="hover:bg-red-300 p-2 bg-red-600 mr-3 rounded-md text-gray-100">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                            <path
+                                                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                            <path fill-rule="evenodd"
+                                                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                                        </svg>
+                                    </button>
+                                @endif
+                            </div>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
 
         </div>

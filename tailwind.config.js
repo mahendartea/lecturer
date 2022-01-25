@@ -7,7 +7,6 @@ module.exports = {
     "./storage/framework/views/*.php",
     "./resources/views/**/*.blade.php",
   ],
-  darkMode: "disable",
 
   theme: {
     extend: {
@@ -31,5 +30,14 @@ module.exports = {
 
   options: {
     safelist: [/data-theme$/],
+  },
+
+  daisyui: {
+    styled: true,
+    themes: true,
+    base: true,
+    utils: true,
+    logs: true,
+    rtl: false,
   },
 };
