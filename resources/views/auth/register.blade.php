@@ -4,7 +4,7 @@
         {{-- <x-jet-authentication-card-logo /> --}}
     </x-slot>
 
-    <x-jet-validation-errors class="mb-4" />
+    {{-- <x-jet-validation-errors class="mb-4" /> --}}
 
     <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
         <div class="w-full sm:max-w-3xl mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
@@ -16,25 +16,34 @@
                         <div class="px-2 my-2">
                             <x-jet-label for="name" value="{{ __('Nama Lengkap') }}" />
                             <x-jet-input id="name" class="m-auto w-full" type="text" name="name" :value="old('name')"
-                                required autofocus autocomplete="name" />
+                                autofocus autocomplete="name" />
+                            @error('name') <span
+                                    class="error text-center mt-1 text-red-600 text-xs italic">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="px-2 my-2">
                             <x-jet-label for="email" value="{{ __('Email') }}" />
                             <x-jet-input id="email" class="m-auto w-full" type="email" name="email"
-                                :value="old('email')" required />
+                                :value="old('email')" />
+                            @error('email') <span
+                                    class="error text-center mt-1 text-red-600 text-xs italic">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="px-2 my-2">
                             <x-jet-label for="password" value="{{ __('Password') }}" />
-                            <x-jet-input id="password" class="m-auto w-full" type="password" name="password" required
+                            <x-jet-input id="password" class="m-auto w-full" type="password" name="password"
                                 autocomplete="new-password" />
+                            @error('password') <span
+                                    class="error text-center mt-1 text-red-600 text-xs italic">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="px-2 my-2">
                             <x-jet-label for="password_confirmation" value="{{ __('Konfirmasi Password') }}" />
                             <x-jet-input id="password_confirmation" class="m-auto w-full" type="password"
-                                name="password_confirmation" required autocomplete="new-password" />
+                                name="password_confirmation" autocomplete="new-password" />
                         </div>
 
                         <div class="px-2 my-2">
@@ -44,6 +53,9 @@
                                 <option value="2">Mahasiswa</option>
                                 <option value="3">Dosen</option>
                             </select>
+                            @error('role_id') <span
+                                    class="error text-center mt-1 text-red-600 text-xs italic">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="px-2 my-2" x-show="status_pt == 1">
@@ -55,6 +67,7 @@
                                     <option value="{{ $ptn->id }}">{{ $ptn->nama_universitas }}</option>
                                 @endforeach
                             </select>
+
                             <small class="text-muted text-xs italic">Jika tidak terdaftar, hubungi administrator</small>
                         </div>
 
@@ -62,6 +75,9 @@
                             <x-jet-label for="student_address" value="{{ __('Alamat (Kota/Kabupaten)') }}" />
                             <x-jet-input id="student_address" class="m-auto w-full" type="text"
                                 :value="old('student_address')" name="student_address" />
+                            @error('student_address') <span
+                                    class="error text-center mt-1 text-red-600 text-xs italic">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="px-2 my-2" x-show="role_id == 2">
