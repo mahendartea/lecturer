@@ -94,6 +94,7 @@
         <div class="w-3/4 p-5 text-center border-l border-gray-300">
             <livewire:teacher.courses.subjects :idyear="$courseYearActive" :key="$courseYearActive" />
         </div>
+
     </div>
     @if ($confirmingDeleteYear)
         <x-jet-dialog-modal wire:model="confirmingDeleteYear">
