@@ -15,7 +15,7 @@
          </div>
       @endif
       <button class="btn btn-active btn-sm text-sm capitalize" wire:click="$toggle('statusFormCourse')" role="button"
-         aria-pressed="true"> + Tambah</button>
+         aria-pressed="true"> + Tambah </button>
    </div>
    @if (count($subjects) >= 1)
       <table class="table w-full">
@@ -43,14 +43,14 @@
                   <td class="text-neutral text-sm">{{ $ta->ket_tahun_ajar }}</td>
                   <td>
                      <div class="flex space-x-3 items-center">
-                        <div class="text-sm">
+                        <div class="text-sm cursor-pointer" title="ubah" wire:click="editSubject({{ $subject->id }})">
                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                               class="w-5" stroke="currentColor">
                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                  d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                            </svg>
                         </div>
-                        <div class="text-sm">
+                        <div class="text-sm cursor-pointer" title="hapus">
                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                               class="w-5" stroke="currentColor">
                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -70,6 +70,7 @@
       {{ $subjects->links() }}
    </div>
 
+   {{-- Modal Tambah Matakuliah --}}
    @if ($statusFormCourse)
       <form wire:submit.prevent="storemk">
          <x-jet-dialog-modal wire:model="statusFormCourse">
@@ -140,4 +141,81 @@
          </x-jet-dialog-modal>
       </form>
    @endif
+   {{-- end modal tambah matakuliah --}}
+
+   {{-- modal edit matakuliah --}}
+   @if ($editFormSubject)
+      <form wire:submit.prevent="updatemk">
+         <x-jet-dialog-modal wire:model="editFormSubject">
+            @csrf
+            <x-slot name="title">
+               {{ __('Formulir ubah matakuliah') }}
+            </x-slot>
+
+            <x-slot name="content">
+               <input type="text" value={{ $idmk }} hidden>
+               <div class="form-control" wire:model="coursecode">
+                  <label class="label">
+                     <span class="label-text">Kode MK</span>
+                  </label>
+                  <input type="text" placeholder="Masukan kode matakuliah" class="input input-bordered"
+                     value={{ $coursecode }}>
+                  @error('coursecode') <span
+                        class="error text-center mt-1 text-red-600 text-xs italic">{{ $message }}</span>
+                  @enderror
+               </div>
+
+               <div class="form-control" wire:model="coursename">
+                  <label class="label">
+                     <span class="label-text">Nama MK</span>
+                  </label>
+                  <input type="text" placeholder="Masukan nama matakuliah" class="input input-bordered"
+                     value="{{ $coursename }}">
+                  @error('coursename') <span
+                        class="error text-center mt-1 text-red-600 text-xs italic">{{ $message }}</span>
+                  @enderror
+               </div>
+
+               <div class="form-control" wire:model="cls">
+                  <label class="label">
+                     <span class="label-text">Kelas</span>
+                  </label>
+                  <input type="text" placeholder="Masukan Kelas" class="input input-bordered"
+                     value="{{ $cls }}">
+                  @error('cls') <span
+                        class="error text-center mt-1 text-red-600 text-xs italic">{{ $message }}</span>
+                  @enderror
+               </div>
+
+               <div class="form-control">
+                  <label class="label">
+                     <span class="label-text">Pilih Tahun Ajar</span>
+                  </label>
+                  <select wire:model="courseyear" class="select select-bordered w-full max-w-xs">
+                     <option selected="selected" value={{ $courseyear }}>{{ $ta->ket_tahun_ajar }}</option>
+                     {{-- @foreach ($talist as $tlist)
+                        <option value="{{ $tlist->id }}">{{ $tlist->ket_tahun_ajar }}</option>
+                     @endforeach --}}
+                  </select>
+                  @error('courseyear') <span
+                        class="error text-center mt-1 text-red-600 text-xs italic">{{ $message }}</span>
+                  @enderror
+               </div>
+
+            </x-slot>
+
+            <x-slot name="footer">
+               <x-jet-secondary-button wire:click="$toggle('editFormSubject')" wire:loading.attr="disabled">
+                  {{ __('Cancel') }}
+               </x-jet-secondary-button>
+
+               <x-jet-button class="ml-2">
+                  {{ __('Ubah') }}
+               </x-jet-button>
+
+            </x-slot>
+         </x-jet-dialog-modal>
+      </form>
+   @endif
+   {{-- end edit modal matakuliah --}}
 </div>

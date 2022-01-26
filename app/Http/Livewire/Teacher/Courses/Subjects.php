@@ -14,11 +14,13 @@ class Subjects extends Component
     public $paginate = 5;
     public $dataActive = 1;
     public $statusFormCourse = 0;
+    public $editFormSubject = 0;
 
     public $coursecode;
     public $coursename;
     public $courseyear;
     public $cls;
+    public $idmk;
 
     public function mount($idyear)
     {
@@ -78,13 +80,36 @@ class Subjects extends Component
         ]);
 
         $this->statusFormCourse = 0;
+        $this->dataActive = $this->courseyear;
 
         session()->flash('message', 'Matakuliah berhasil ditambahkan..!');
     }
 
-    public function closeComponent()
+    public function editSubject($id)
     {
-        // refresh page laravel
-        // $this->emit('refreshPage');
+        $dataEditSubject = Course::find($id);
+        $this->idmk = $dataEditSubject->id;
+        $this->coursecode = $dataEditSubject->code_course;
+        $this->coursename = $dataEditSubject->name_course;
+        $this->courseyear = $dataEditSubject->course_year_id;
+        $this->cls = $dataEditSubject->class;
+
+        $this->editFormSubject = 1;
+    }
+
+    public function updatemk()
+    {
+        $this->validate();
+        $editcourse = Course::find($this->idmk);
+        $editcourse->code_course = $this->coursecode;
+        $editcourse->name_course = $this->coursename;
+        $editcourse->course_year_id = $this->courseyear;
+        $editcourse->class = $this->cls;
+        $editcourse->update();
+
+        $this->editFormSubject = 0;
+        $this->dataActive = $this->courseyear;
+
+        session()->flash('message', 'Matakuliah berhasil diubah..!');
     }
 }
