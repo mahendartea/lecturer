@@ -15,6 +15,7 @@ class Subjects extends Component
     public $dataActive = 1;
     public $statusFormCourse = 0;
     public $editFormSubject = 0;
+    public $deleteFormSubject = 0;
 
     public $coursecode;
     public $coursename;
@@ -111,5 +112,19 @@ class Subjects extends Component
         $this->dataActive = $this->courseyear;
 
         session()->flash('message', 'Matakuliah berhasil diubah..!');
+    }
+
+    public function showDeleteSubjectItem($id)
+    {
+        $this->deleteFormSubject = 1;
+        $this->idmk = $id;
+    }
+
+    public function deleteSubject($id)
+    {
+        $deleteSubject = Course::find($id);
+        $deleteSubject->delete();
+        $this->deleteFormSubject = 0;
+        session()->flash('message', 'Matakuliah berhasil dihapus..!');
     }
 }

@@ -86,9 +86,9 @@
                   @foreach ($CourseHis as $chis)
                      <div class="@if (!$deleteStatus) flex items-center justify-between @endif">
 
-                        <li class=" @if ($chis->id == $courseYearActive) bordered @endif @if (!$deleteStatus) w-3/4 @else w-full @endif">
+                        <li class="@if ($chis->id == $courseYearActive) bordered @endif @if (!$deleteStatus) w-3/4 @else w-full @endif">
                            <button wire:click="toChangeCourseYearValue({{ $chis->id }})"
-                              class=" text-xs cursor-pointer text-primary-content rounded-xs @if ($chis->id == $courseYearActive) hover:bg-indigo-200 bg-indigo-300 @endif">
+                              class=" text-xs cursor-pointer text-base-content rounded-xs @if ($chis->id == $courseYearActive) hover:bg-indigo-200 bg-indigo-300 @endif">
                               {{ $chis->ket_tahun_ajar }}
                            </button>
                         </li>
@@ -132,7 +132,7 @@
                {{ __('Tidak') }}
             </x-jet-secondary-button>
 
-            <x-jet-danger-button class="ml-2" wire:click="deleteYearNow({{ $idYear }})"
+            <x-jet-danger-button class="ml-2" wire:click="deleteSubject({{ $idYear }})"
                wire:loading.attr="disabled">
                {{ __('Hapus Tahun Ajar') }}
             </x-jet-danger-button>

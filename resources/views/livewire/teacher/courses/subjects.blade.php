@@ -21,12 +21,12 @@
       <table class="table w-full">
          <thead>
             <tr>
-               <th class="bg-neutral text-primary-content">No</th>
-               <th class="bg-neutral text-primary-content">Kode MK</th>
-               <th class="bg-neutral text-primary-content">Nama Mata Kuliah</th>
-               <th class="bg-neutral text-primary-content">Kelas</th>
-               <th class="bg-neutral text-primary-content">Tahun Ajar</th>
-               <th class="bg-neutral text-primary-content">Aksi</th>
+               <th class="text-gray-100 bg-gray-500">No</th>
+               <th class="text-gray-100 bg-gray-500">Kode MK</th>
+               <th class="text-gray-100 bg-gray-500">Nama Mata Kuliah</th>
+               <th class="text-gray-100 bg-gray-500">Kelas</th>
+               <th class="text-gray-100 bg-gray-500">Tahun Ajar</th>
+               <th class="text-gray-100 bg-gray-500">Aksi</th>
             </tr>
          </thead>
          <tbody>
@@ -36,21 +36,23 @@
 
             @foreach ($subjects as $subject)
                <tr>
-                  <td class="py-2 text-neutral text-sm">{{ $no++ }}</td>
-                  <td class="text-neutral text-sm">{{ $subject->code_course }}</td>
-                  <td class="text-neutral text-sm">{{ $subject->name_course }}</td>
-                  <td class="text-neutral text-sm">{{ $subject->class }}</td>
-                  <td class="text-neutral text-sm">{{ $ta->ket_tahun_ajar }}</td>
-                  <td>
+                  <td class="py-2 text-base-content bg-base-200 text-sm">{{ $no++ }}</td>
+                  <td class="text-base-content bg-base-200 text-sm">{{ $subject->code_course }}</td>
+                  <td class="text-base-content bg-base-200 text-sm">{{ $subject->name_course }}</td>
+                  <td class="text-base-content bg-base-200 text-sm">{{ $subject->class }}</td>
+                  <td class="text-base-content bg-base-200 text-sm">{{ $ta->ket_tahun_ajar }}</td>
+                  <td class="text-base-content bg-base-200">
                      <div class="flex space-x-3 items-center">
-                        <div class="text-sm cursor-pointer" title="ubah" wire:click="editSubject({{ $subject->id }})">
+                        <div class="text-sm cursor-pointer tooltip" data-tip="ubah"
+                           wire:click="editSubject({{ $subject->id }})">
                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                               class="w-5" stroke="currentColor">
                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                  d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                            </svg>
                         </div>
-                        <div class="text-sm cursor-pointer" title="hapus">
+                        <div wire:click="showDeleteSubjectItem({{ $subject->id }})"
+                           class="text-sm cursor-pointer tooltip" data-tip="hapus">
                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                               class="w-5" stroke="currentColor">
                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -64,8 +66,9 @@
          </tbody>
       </table>
    @else
-      <div class="text-primary">Data untuk Tahun Ajar ini kosong..!</div>
+      <div class="text-primary">Silahkan pilih Tahun Ajar terlebih dahulu...</div>
    @endif
+
    <div class="pt-5">
       {{ $subjects->links() }}
    </div>
@@ -218,4 +221,29 @@
       </form>
    @endif
    {{-- end edit modal matakuliah --}}
+
+   {{-- modal hapus matakuliah --}}
+   @if ($deleteFormSubject)
+      <x-jet-dialog-modal wire:model="deleteFormSubject">
+         <x-slot name="title">
+            {{ __('Apakah anda yakin?') }}
+         </x-slot>
+
+         <x-slot name="content">
+            {{ __('Apakah anda ingin menghapus Matakuliah ini? ') }}
+
+         </x-slot>
+
+         <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('deleteFormSubject')" wire:loading.attr="disabled">
+               {{ __('Tidak') }}
+            </x-jet-secondary-button>
+
+            <x-jet-danger-button class="ml-2" wire:click="deleteSubject({{ $idmk }})"
+               wire:loading.attr="disabled">
+               {{ __('Hapus Tahun Ajar') }}
+            </x-jet-danger-button>
+         </x-slot>
+      </x-jet-dialog-modal>
+   @endif
 </div>
