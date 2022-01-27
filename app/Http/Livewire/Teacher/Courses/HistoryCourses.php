@@ -5,9 +5,12 @@ namespace App\Http\Livewire\Teacher\Courses;
 use App\Models\CourseYear;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class HistoryCourses extends Component
 {
+   use WithPagination;
+   public $paginate = 5;
    public $courseYearActive = 1;
    public $showFormAddYear = false;
    public $deleteStatus = true;
@@ -21,7 +24,7 @@ class HistoryCourses extends Component
    {
       $queryData = CourseYear::where('user_id', Auth::id())->orderBy('year', 'desc')->orderBy('semester', 'desc');
       $data = [
-         'CourseYears' => $queryData->get(),
+         'CourseYears' => $queryData->simplePaginate($this->paginate),
       ];
       return view('livewire.teacher.courses.history-courses', ['CourseHis' => $data['CourseYears']]);
    }
