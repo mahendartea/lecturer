@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
             // PtSeeder::class,
             UserSeeder::class,
             CourseYearSeeder::class,
+            FacultySeeder::class,
+            StudyProgramSeeder::class,
             CourseSeeder::class,
         ]);
     }

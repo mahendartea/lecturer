@@ -21,7 +21,7 @@ class CourseSeeder extends Seeder
         'course_year_id' => '1',
         'class' => 'A',
         'user_id' => 1,
-        'prodi_id' => '19291'
+        'study_program_id' => '1'
       ],
     );
   }

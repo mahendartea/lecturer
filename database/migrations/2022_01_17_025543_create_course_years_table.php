@@ -31,9 +31,10 @@ class CreateCourseYearsTable extends Migration
    */
   public function down()
   {
-    Schema::table('course_years', function (Blueprint $table) {
-      $table->dropForeign(['user_id']);
-      $table->dropColumn(['user_id']);
-    });
+    Schema::dropIfExists('course_years');
+    // Schema::table('course_years', function (Blueprint $table) {
+    // $table->dropForeign(['user_id']);
+    // $table->dropColumn(['user_id']);
+    // });
   }
 }

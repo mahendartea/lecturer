@@ -17,6 +17,8 @@ class CreateFacultiesTable extends Migration
          $table->id();
          $table->string('faculty_code');
          $table->string('faculty_name');
+         $table->unsignedBigInteger('dataptn_id');
+         $table->foreign('dataptn_id')->references('id')->on('dataptns')->onDelete('cascade');
          $table->timestamps();
       });
    }

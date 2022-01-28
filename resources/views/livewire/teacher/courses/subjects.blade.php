@@ -26,6 +26,7 @@
                <th class="text-gray-100 bg-gray-500">Nama Mata Kuliah</th>
                <th class="text-gray-100 bg-gray-500">Kelas</th>
                <th class="text-gray-100 bg-gray-500">Tahun Ajar</th>
+               <th class="text-gray-100 bg-gray-500">Prodi MK</th>
                <th class="text-gray-100 bg-gray-500">Aksi</th>
             </tr>
          </thead>
@@ -41,6 +42,7 @@
                   <td class="text-base-content bg-base-200 text-sm">{{ $subject->name_course }}</td>
                   <td class="text-base-content bg-base-200 text-sm">{{ $subject->class }}</td>
                   <td class="text-base-content bg-base-200 text-sm">{{ $ta->ket_tahun_ajar }}</td>
+                  <td class="text-base-content bg-base-200 text-sm">Prodi MK</td>
                   <td class="text-base-content bg-base-200">
                      <div class="flex space-x-3 items-center">
                         <div class="text-sm cursor-pointer tooltip" data-tip="ubah"

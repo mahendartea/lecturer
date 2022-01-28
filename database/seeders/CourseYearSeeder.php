@@ -17,13 +17,13 @@ class CourseYearSeeder extends Seeder
    {
       CourseYear::create(
          [
-            'semester' => '1',
+            'semester' => 'Ganjil',
             'year' => '2021',
             'ket_tahun_ajar' => 'Ganjil 2021',
             'user_id' => 1
          ],
          [
-            'semester' => '2',
+            'semester' => 'Genap',
             'year' => '2021',
             'ket_tahun_ajar' => 'Genap 2021',
             'user_id' => 1

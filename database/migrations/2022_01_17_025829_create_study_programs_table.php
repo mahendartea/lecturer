@@ -17,8 +17,8 @@ class CreateStudyProgramsTable extends Migration
          $table->id();
          $table->string('kode_prodi');
          $table->string('prodi_name');
-         $table->foreignId('faculty_id')->unsigned();
-//         $table->foreign('faculty_id')->references('faculty_code')->on('faculties')->onDelete('cascade');
+         $table->unsignedBigInteger('faculty_id');
+         $table->foreign('faculty_id')->references('id')->on('faculties')->onDelete('cascade');
          $table->timestamps();
       });
    }

@@ -19,7 +19,7 @@ class CreateCoursesTable extends Migration
          $table->string('name_course');
          $table->unsignedBigInteger('course_year_id');
          $table->unsignedBigInteger('user_id');
-         $table->unsignedBigInteger('prodi_id');
+         $table->unsignedBigInteger('study_program_id');
          $table->string('class');
          $table->foreign('course_year_id')->references('id')->on('course_years')->onDelete('cascade');
          $table->timestamps();
@@ -33,10 +33,10 @@ class CreateCoursesTable extends Migration
     */
    public function down()
    {
-      // Schema::dropIfExists('courses');
-      Schema::table('courses', function (Blueprint $table) {
-         $table->dropForeign(['course_year_id']);
-         $table->dropColumn(['course_year_id']);
-      });
+      Schema::dropIfExists('courses');
+      // Schema::table('courses', function (Blueprint $table) {
+      //    $table->dropForeign(['course_year_id']);
+      //    $table->dropColumn(['course_year_id']);
+      // });
    }
 }
