@@ -137,7 +137,7 @@
                {{ __('Tidak') }}
             </x-jet-secondary-button>
 
-            <x-jet-danger-button class="ml-2" wire:click="deleteSubject({{ $idYear }})"
+            <x-jet-danger-button class="ml-2" wire:click="deleteYearNow({{ $idYear }})"
                wire:loading.attr="disabled">
                {{ __('Hapus Tahun Ajar') }}
             </x-jet-danger-button>
