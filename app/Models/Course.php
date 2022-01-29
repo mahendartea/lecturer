@@ -14,6 +14,6 @@ class Course extends Model
 
     public function courseyear()
     {
-        return $this->belongsTo(CourseYear::class);
+        return $this->belongsTo(CourseYear::class, 'course_year_id');
     }
 }

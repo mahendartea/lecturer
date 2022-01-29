@@ -41,7 +41,7 @@
                   <td class="text-base-content bg-base-200 text-sm">{{ $subject->code_course }}</td>
                   <td class="text-base-content bg-base-200 text-sm">{{ $subject->name_course }}</td>
                   <td class="text-base-content bg-base-200 text-sm">{{ $subject->class }}</td>
-                  <td class="text-base-content bg-base-200 text-sm">{{ $ta->ket_tahun_ajar }}</td>
+                  <td class="text-base-content bg-base-200 text-sm">{{ $subject->courseyear->ket_tahun_ajar }}</td>
                   <td class="text-base-content bg-base-200 text-sm">Prodi MK</td>
                   <td class="text-base-content bg-base-200">
                      <div class="flex space-x-3 items-center">
@@ -67,6 +67,7 @@
             @endforeach
          </tbody>
       </table>
+
    @else
       <div class="text-primary">Silahkan pilih Tahun Ajar terlebih dahulu...</div>
    @endif

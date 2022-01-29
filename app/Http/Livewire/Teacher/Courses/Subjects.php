@@ -31,16 +31,14 @@ class Subjects extends Component
     public function render()
     {
         $dataMakul = Course::where('user_id', Auth::id());
-        $cetakta = CourseYear::where('id', $this->dataActive)->get();
-        $listyearcourses = CourseYear::where('user_id', Auth::id())->orderBy('year', 'desc')->orderBy('semester', 'desc')->get();
+        $cetakta = CourseYear::where('id', $this->dataActive)->with('course')->get();
 
         $data = [
             'subjects' => $dataMakul->where('course_year_id', $this->dataActive)->with('courseyear')->paginate($this->paginate),
             'year' => $cetakta[0],
-            'talist' => $listyearcourses,
         ];
 
-        return view('livewire.teacher.courses.subjects', ['subjects' => $data['subjects'], 'ta' => $data['year'], 'talist' => $data['talist']]);
+        return view('livewire.teacher.courses.subjects', ['subjects' => $data['subjects'], 'ta' => $data['year']]);
     }
 
     public function showFormCourse()
@@ -77,7 +75,7 @@ class Subjects extends Component
             'name_course' => $this->coursename,
             'course_year_id' => $this->courseyear,
             'class' => $this->cls,
-            'prodi_id' => 12321,
+            'study_program_id' => 1,
         ]);
 
         $this->statusFormCourse = 0;
