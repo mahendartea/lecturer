@@ -31,10 +31,9 @@
          <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
             <th class="py-3 px-6 text-left">No</th>
             <th class="py-3 px-6 text-left">Nama Universitas</th>
-            {{-- <th class="py-3 px-6 text-left">Singakatan</th> --}}
             <th class="py-3 px-6 text-left">Status</th>
-            {{-- <th class="py-3 px-6 text-left">Email</th> --}}
-            <th class="py-3 px-6 text-left">Alamat Web</th>
+            <th class="py-3 px-6 text-left">Email</th>
+            <th class="py-3 px-6 text-left">Kontak</th>
             <th class="py-3 px-6 text-center">Action</th>
          </tr>
       </thead>
@@ -54,19 +53,29 @@
                </td>
                <td class="py-3 px-6 text-left">
                   <div class="flex items-center">
-                     <span>{{ $ptn->nama_universitas }}</span>
+                     <span class="mr-1">{{ $ptn->nama_universitas }}</span>
+                     @if ($ptn->weblink)
+                        <span class="cursor-pointer">
+                           <a href="{{ $ptn->weblink }}" target="_blank" title="kunjungi">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-arrow-up-right-circle-fill" viewBox="0 0 16 16">
+                                 <path
+                                    d="M0 8a8 8 0 1 0 16 0A8 8 0 0 0 0 8zm5.904 2.803a.5.5 0 1 1-.707-.707L9.293 6H6.525a.5.5 0 1 1 0-1H10.5a.5.5 0 0 1 .5.5v3.975a.5.5 0 0 1-1 0V6.707l-4.096 4.096z" />
+                              </svg>
+                           </a>
+                        </span>
+                     @endif
                   </div>
                </td>
-               {{-- <td class="py-3 px-6 text-left"></td> --}}
                <td
                   class="py-3 px-6 text-left uppercase font-bold {{ $ptn->statuspt == 1 ? 'text-gray-700' : 'text-gray-500' }}">
-                  {{ $ptn->statuspt == 1 ? 'Negeri' : 'Swasta' }}</td>
-               {{-- <td class="py-3 px-6 text-left">{{ $ptn->email }}</td> --}}
+                  {{ $ptn->statuspt == 1 ? 'Negeri' : 'Swasta' }}
+               </td>
+               <td class="py-3 px-6 text-left flex cursor-pointer">
+                  <span class="mr-1 hover:underline">{{ $ptn->email }}</span>
+               </td>
                <td class="py-3 px-6 text-left">
-                  @if ($ptn->weblink)
-                     <a class="rounded-lg bg-gray-700 py-1 px-2 text-white text-xs" target="_blank"
-                        href="{{ $ptn->weblink }}">Kunjungi</a>
-                  @endif
+                  {{ $ptn->kontak }}
                </td>
                <td class="py-3 px-6">
                   <div class="flex item-center justify-center text-left">

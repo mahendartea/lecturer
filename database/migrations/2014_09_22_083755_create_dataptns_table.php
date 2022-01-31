@@ -21,7 +21,7 @@ class CreateDataptnsTable extends Migration
             $table->string('weblink')->nullable();
             $table->text('alamat')->nullable();
             $table->string('kontak')->nullable();
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->timestamps();
         });
     }
