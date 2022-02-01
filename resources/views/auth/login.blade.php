@@ -1,52 +1,52 @@
 <x-guest-layout>
-    <x-jet-authentication-card>
-        <x-slot name="logo">
-            {{-- <x-jet-authentication-card-logo /> --}}
-        </x-slot>
+   <div class="hero min-h-screen bg-base-200" data-theme="light">
+      <div class="flex-col justify-center hero-content lg:flex-row">
+         <div class="text-center lg:text-left">
+            <h1 class="mb-5 text-5xl font-bold">
+               Selamat Datang..
+            </h1>
+            <p class="mb-5 mr-5">
+               Silahkan login untuk mengakses aplikasi sebagai Dosen atau Mahasiswa.
+            </p>
+            <p>Belum memiliki akun? silahkan <a href="{{ route('register') }}"> <span
+                     class="text-blue-500">registrasi.</span> </a> </p>
+         </div>
+         <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+            @if (session('status'))
+               <div class="mb-4 font-medium text-sm text-green-600">
+                  {{ session('status') }}
+               </div>
+            @endif
+            <form method="POST" action="{{ route('login') }}">
+               @csrf
+               <div class="card-body">
+                  <div class="form-control">
+                     <label class="label">
+                        <span class="label-text">Email</span>
+                     </label>
+                     <input type="email" placeholder="email" class="input input-bordered" name="email"
+                        :value="old('email')" required autofocus>
+                  </div>
+                  <div class="form-control">
+                     <label class="label">
+                        <span class="label-text">Password</span>
+                     </label>
+                     <input type="password" name="password" required autocomplete="current-password"
+                        placeholder="password" class="input input-bordered">
 
-        <x-jet-validation-errors class="mb-4" />
-
-        @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ session('status') }}
-            </div>
-        @endif
-
-        <h1 class="text-center text-xl">Login</h1>
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
-
-            <div>
-                <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')"
-                    required autofocus />
-            </div>
-
-            <div class="mt-4">
-                <x-jet-label for="password" value="{{ __('Password') }}" />
-                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required
-                    autocomplete="current-password" />
-            </div>
-
-            <div class="block mt-4">
-                <label for="remember_me" class="flex items-center">
-                    <x-jet-checkbox id="remember_me" name="remember" />
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900"
-                        href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
-
-                <x-jet-button class="ml-4">
-                    {{ __('Login') }}
-                </x-jet-button>
-            </div>
-        </form>
-    </x-jet-authentication-card>
+                     @if (Route::has('password.request'))
+                        <label class="label mt-5">
+                           <a class="label-text-alt" href="{{ route('password.request') }}">Forgot
+                              password?</a>
+                        </label>
+                     @endif
+                  </div>
+                  <div class="form-control mt-6">
+                     <input type="submit" value="Login" class="btn btn-primary">
+                  </div>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
 </x-guest-layout>
