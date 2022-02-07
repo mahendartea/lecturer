@@ -19,6 +19,6 @@ class StudyProgram extends Model
 
     public function faculty()
     {
-        $this->belongsTo(Faculty::class);
+        $this->belongsTo(Faculty::class, 'faculty_id');
     }
 }

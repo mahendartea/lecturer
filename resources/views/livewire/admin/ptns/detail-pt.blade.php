@@ -8,9 +8,11 @@
          </div>
 
          <div class="text-center lg:text-left max-w-xl px-7 py-12 lg:max-w-5xl lg:w-1/2 bg-gray-100">
-            <h2 class="text-2xl font-bold text-indigo-600 dark:text-white md:text-2xl">
-               {{ $namaUniv }}
-               <span>
+            <div class="flex items-center">
+               <h2 class="text-xl font-bold text-indigo-600 dark:text-white">
+                  {{ $namaUniv }}
+               </h2>
+               <span class="mx-2 text-indigo-600">
                   @if ($weblink)
                      <a href="{{ $weblink }}" target="_blank" class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -23,7 +25,7 @@
                      </a>
                   @endif
                </span>
-            </h2>
+            </div>
 
             @if ($description)
                <p class="my-4 mx-1 text-gray-600 dark:text-gray-400 h-32 overflow-auto border border-gray-200 p-1">

@@ -51,4 +51,10 @@ class PtnsNegeri extends Component
         $dataEditPt = Dataptn::where('id', $idPt)->get();
         $this->emit('editPtE', $dataEditPt[0]);
     }
+
+    public function managePt($id)
+    {
+        $dataManagePt = Dataptn::where('id', $id)->get();
+        $this->emit('managePtE', $dataManagePt[0]);
+    }
 }

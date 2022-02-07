@@ -3,23 +3,26 @@
       <div class="mx-auto py-4 sm:px-6 lg:px-8">
          <div class="flex justify-between">
             <div>
-               <button wire:click="ptnsIndex" class="font-semibold text-md px-3 rounded-lg text-gray-500 @if ($ptnsStatus==1) text-indigo-600 @endif leading-tight mx-3
+               <button wire:click="ptnsIndex"
+                  class="font-semibold text-md px-3 rounded-lg text-gray-500 @if ($ptnsStatus == 1) text-indigo-600 @endif leading-tight mx-3
                   hover:text-gray-700 cursor-pointer focus:outline-none">
                   {{ __('Semua') }}
                </button>
-               <button wire:click="ptnsNegeri" class="font-semibold text-md px-3 rounded-lg text-gray-500 @if ($ptnsStatus==2) text-indigo-600 @endif leading-tight mx-3
+               <button wire:click="ptnsNegeri"
+                  class="font-semibold text-md px-3 rounded-lg text-gray-500 @if ($ptnsStatus == 2) text-indigo-600 @endif leading-tight mx-3
                   hover:text-gray-700 cursor-pointer focus:outline-none">
                   {{ __('Negeri') }}
                </button>
                <button wire:click="ptnsSwasta"
-                  class="font-semibold text-md px-3 rounded-lg text-gray-500 leading-tight @if ($ptnsStatus==3) text-indigo-600 @endif mx-3 hover:text-gray-700
+                  class="font-semibold text-md px-3 rounded-lg text-gray-500 leading-tight @if ($ptnsStatus == 3) text-indigo-600 @endif mx-3 hover:text-gray-700
                   cursor-pointer focus:outline-none">
                   {{ __('Swasta') }}
                </button>
             </div>
             <div>
-               <button wire:click="addPtns" class="flex items-center bg-gray-700 py-1 px-4 shadow-md rounded-md
-                        font-semibold text-md text-white @if ($ptnsStatus==4) bg-indigo-600 @endif leading-tight mx-3 hover:bg-gray-600 cursor-pointer
+               <button wire:click="addPtns"
+                  class="flex items-center bg-gray-700 py-1 px-4 shadow-md rounded-md
+                        font-semibold text-md text-white @if ($ptnsStatus == 4) bg-indigo-600 @endif leading-tight mx-3 hover:bg-gray-600 cursor-pointer
                   focus:outline-none">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                      class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
@@ -76,8 +79,9 @@
          @case(6)
             <livewire:admin.ptns.ptns-edit />
          @break
-      @endswitch
-
+         @case(7)
+            <livewire:admin.ptns.ptn-manage />
+         @endswitch
    </div>
 
 </div>

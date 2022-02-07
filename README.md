@@ -250,6 +250,8 @@ c. Forum
    3. prodi_name *(string)* 
    
    4. fakulty_id *(string - constrained dengan table fakulty)* 
+   
+   5. dataptn_id
 
 7. Table Fakultas (faculty) - dibuat dengan migration
    

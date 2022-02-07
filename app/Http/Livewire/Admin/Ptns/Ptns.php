@@ -13,7 +13,8 @@ class Ptns extends Component
         'detailPT' => 'viewDetailPt',
         'storePtns' => 'ptnsStored',
         'editPtE' => 'viewEditPt',
-        'UpdatedPtE' => 'PtUpdated'
+        'UpdatedPtE' => 'PtUpdated',
+        'managePtE' => 'viewManagePt',
     ];
 
     public function render()
@@ -73,7 +74,12 @@ class Ptns extends Component
 
     public function closeComponent()
     {
-        // '';
         return redirect()->to('admin/ptns');
+    }
+
+    public function viewManagePt($dataManagePt)
+    {
+        $this->ptnsStatus = 7;
+        $this->emit('toPtnManage', $dataManagePt);
     }
 }

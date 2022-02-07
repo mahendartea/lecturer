@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Users;
 
+use App\Models\Dataptn;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -19,12 +20,15 @@ class UserForm extends Component
    public $student_licence_number;
    public $teacher_qualifications;
    public $teacher_nidn;
-   public $data_pt;
+   // public $data_pt;
 
    public function render()
    {
-      $this->data_pt = DB::table('dataptns')->get();
-      return view('livewire.admin.users.user-form', ['datapt' => $this->data_pt]);
+      $datapt = Dataptn::all();
+
+      return view('livewire.admin.users.user-form', [
+         'datapt' => $datapt
+      ]);
    }
 
    protected $rules = [

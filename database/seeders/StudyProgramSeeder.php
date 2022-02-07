@@ -19,6 +19,7 @@ class StudyProgramSeeder extends Seeder
                 'kode_prodi' => '19291',
                 'prodi_name' => 'Sistem Informasi',
                 'faculty_id' => '1',
+                'dataptn_id' => '310',
             ]
         );
     }
