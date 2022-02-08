@@ -39,7 +39,13 @@ class PtnManage extends Component
     $jumlahfakulties = count($fakulties->with('studyprogram')->get());
     $jmlProdi = count($fakulties->with('studyprogram')->get()->pluck('studyprogram')->flatten()->unique('id'));
     $jmlDosen = count(User::where('id_pt', $this->idpt)->where('role_id', 3)->get());
+    $dataFukultas = $fakulties->with('studyprogram')->get();
 
-    return view('livewire.admin.ptns.ptn-manage', ['jmlfakultas' => $jumlahfakulties, 'jmlprodi' => $jmlProdi, 'jmldosen' => $jmlDosen]);
+    return view('livewire.admin.ptns.ptn-manage', [
+      'faculties' => $dataFukultas,
+      'jmlfakultas' => $jumlahfakulties,
+      'jmlprodi' => $jmlProdi,
+      'jmldosen' => $jmlDosen,
+    ]);
   }
 }

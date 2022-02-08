@@ -1,5 +1,5 @@
 <div>
-   <header class="shadow bg-white rounded-b-md">
+   <div class="shadow bg-white rounded-b-md">
       <div class="mx-auto py-4 sm:px-6 lg:px-8">
          <div class="flex justify-between">
             <div>
@@ -34,7 +34,7 @@
             </div>
          </div>
       </div>
-   </header>
+   </div>
 
    @if (session()->has('message'))
       <div class="mt-5" x-data="{}" x-init="setTimeout(() => { $wire.closeComponent() }, 2000);">
