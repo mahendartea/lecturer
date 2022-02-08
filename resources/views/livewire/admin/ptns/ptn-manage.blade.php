@@ -6,9 +6,13 @@
       <li class="text-xs">
          Email : <span class="font-bold">{{ $emailpt }}</span>
       </li>
+      <li class="text-xs">
+         Telp : <span class="font-bold">{{ $kontakpt }}</span>
+      </li>
    </ul>
 
    <hr />
+
    <div class="w-full shadow stats my-5">
       <div class="stat">
          <div class="stat-figure text-secondary">
@@ -20,9 +24,12 @@
                   d="M2 11h1v1H2v-1zm2 0h1v1H4v-1zm-2 2h1v1H2v-1zm2 0h1v1H4v-1zm4-4h1v1H8V9zm2 0h1v1h-1V9zm-2 2h1v1H8v-1zm2 0h1v1h-1v-1zm2-2h1v1h-1V9zm0 2h1v1h-1v-1zM8 7h1v1H8V7zm2 0h1v1h-1V7zm2 0h1v1h-1V7zM8 5h1v1H8V5zm2 0h1v1h-1V5zm2 0h1v1h-1V5zm0-2h1v1h-1V3z" />
             </svg>
          </div>
-         <div class="stat-title font-bold">Fakultas</div>
-         <div class="stat-value">{{ $jmlfakultas }}</div>
-         <div class="stat-desc">Jan 1st - Feb 1st</div>
+         <div class="stat-title font-bold">
+            Fakultas
+         </div>
+         <div class="stat-value">{{ $jmlfakultas }}
+         </div>
+         <div class="stat-desc text-primary hover:text-gray-800 hover:font-bold cursor-pointer">Tambah Data</div>
       </div>
       <div class="stat">
          <div class="stat-figure text-secondary">
@@ -34,9 +41,11 @@
             </svg>
 
          </div>
-         <div class="stat-title font-bold">Program Studi</div>
+         <div class="stat-title font-bold">
+            Program Studi
+         </div>
          <div class="stat-value">{{ $jmlprodi }}</div>
-         <div class="stat-desc text-success">↗︎ 400 (22%)</div>
+         <div class="stat-desc text-primary hover:text-gray-800 hover:font-bold cursor-pointer">Tambah Data</div>
       </div>
       <div class="stat">
          <div class="stat-figure text-secondary">
@@ -47,32 +56,60 @@
                   d="M4.5 0A2.5 2.5 0 0 0 2 2.5V14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2.5A2.5 2.5 0 0 0 11.5 0h-7zM3 2.5A1.5 1.5 0 0 1 4.5 1h7A1.5 1.5 0 0 1 13 2.5v10.795a4.2 4.2 0 0 0-.776-.492C11.392 12.387 10.063 12 8 12s-3.392.387-4.224.803a4.2 4.2 0 0 0-.776.492V2.5z" />
             </svg>
          </div>
-         <div class="stat-title font-bold">Dosen</div>
+         <div class="stat-title font-bold">
+            Dosen
+         </div>
          <div class="stat-value">{{ $jmldosen }}</div>
-         <div class="stat-desc text-error">↘︎ 90 (14%)</div>
+         <div class="stat-desc text-primary hover:text-gray-800 hover:font-bold cursor-pointer">Tambah Data</div>
       </div>
    </div>
 
    <hr />
 
-   <div class="w-full my-5">
+   <div class="w-full my-5 flex">
 
-      @foreach ($faculties as $fac)
-         <div class="collapse w-1/2 my-3 border rounded-box border-base-300 collapse-arrow">
-            <input type="checkbox">
-            <div class="collapse-title text-xl font-medium">
-               {{ $fac->faculty_name }}
+      <div class="mr-3 w-1/2">
+         @foreach ($faculties as $fac)
+            <div class="collapse mb-3 border rounded-box border-base-300 collapse-arrow">
+               <input type="checkbox">
+               <div class="collapse-title text-xl font-medium">
+                  {{ $fac->faculty_name }}
+               </div>
+               <div class="collapse-content ">
+                  <ul>
+                     @foreach ($fac->studyprogram as $prodi)
+                        <li class="ml-2 my-1 p-3 hover:bg-gray-300 rounded-md">
+                           {{ $prodi->prodi_name }}
+                        </li>
+                     @endforeach
+                  </ul>
+               </div>
             </div>
-            <div class="collapse-content ">
-               <ul class="">
-                  @foreach ($fac->studyprogram as $prodi)
-                     <li class="ml-2 my-2 p-5 hover:bg-gray-300 rounded-md">
-                        {{ $prodi->prodi_name }}
-                     </li>
-                  @endforeach
-               </ul>
-            </div>
+         @endforeach
+      </div>
+
+      <div class="ml-3 w-1/2 rounded-md">
+         <p class="text-center text-md font-bold mb-2 bg-gray-300 py-1">Data Dosen</p>
+         <div class="mt-3 px-2">
+            @php
+               $no = ($dataDosen->currentpage() - 1) * $dataDosen->perpage() + 1;
+            @endphp
+            @foreach ($dataDosen as $dosen)
+               <div class="hover:bg-gray-300 p-2">
+                  <div class="flex justify-between items-center">
+                     <span>{{ $no++ }}.
+                        {{ $dosen->name }}
+                     </span>
+                     <span class="text-xs font-light">
+                        {{ $dosen->teacher_nidn }}
+                     </span>
+                  </div>
+               </div>
+            @endforeach
          </div>
-      @endforeach
+         <div class="p-5 text-sm">
+            {{ $dataDosen->links() }}
+         </div>
+      </div>
    </div>
 </div>
