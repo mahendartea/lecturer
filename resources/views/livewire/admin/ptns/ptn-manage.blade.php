@@ -14,6 +14,7 @@
    <hr />
 
    <div class="w-full shadow stats my-5">
+      {{-- Stat Fakultas --}}
       <div class="stat">
          <div class="stat-figure text-secondary">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-building"
@@ -27,10 +28,69 @@
          <div class="stat-title font-bold">
             Fakultas
          </div>
-         <div class="stat-value">{{ $jmlfakultas }}
+         <div class="stat-value">{{ $jmlfakultas }}</div>
+         <label for="modalfak"
+            class="stat-desc text-primary hover:text-gray-800 hover:font-bold cursor-pointer modal-button">Tambah
+            Fakultas</label>
+         <input type="checkbox" id="modalfak" class="modal-toggle" hidden>
+         <div class="modal">
+            <div class="modal-box">
+               <form wire:submit.prevent="storefak">
+                  @csrf
+                  <div>
+                     <h1 class="text-lg">Tambah Fakultas </h1>
+                     <p class="text-xs font-bold"> {{ $namapt }} </p>
+                  </div>
+                  <hr />
+                  <div class="mt-3">
+                     <input type="text" wire:model={{ $idpt }} hidden>
+                     <div class="form-control">
+                        <label class="label">
+                           <span class="label-text">Kode Fakultas</span>
+                        </label>
+                        <input wire:model="kodefak" type="text" placeholder="Kode Fakultas"
+                           class="input input-bordered">
+                        @error('kodefak') <span
+                              class="error text-center mt-1 text-red-600 text-xs italic">{{ $message }}</span>
+                        @enderror
+                     </div>
+                     <div class="form-control">
+                        <label class="label">
+                           <span class="label-text">Nama Fakultas</span>
+                        </label>
+                        <input wire:model="namafak" type="text" placeholder="Nama Fakultas"
+                           class="input input-bordered">
+                        @error('namafak') <span
+                              class="error text-center mt-1 text-red-600 text-xs italic">{{ $message }}</span>
+                        @enderror
+                     </div>
+                  </div>
+                  <div class="modal-action">
+                     <label for="modalfak" class=""></label>
+                     @if (session('message'))
+                        <div class="alert alert-info my-0 mx-1 px-1 py-0" x-data="{show: true}"
+                           x-init="setTimeout(() => show = false, 5000)" x-show="show">
+                           <div class="flex-1">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#009688"
+                                 class="flex-shrink-0 w-6 h-6 mx-2">
+                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
+                                 </path>
+                              </svg>
+                              <label>{{ session('message') }}</label>
+                           </div>
+                        </div>
+                     @endif
+                     <button class="font-bold uppercase btn btn-primary" type="submit"
+                        @if (session('message')) disabled @endif>Tambah</button>
+                     <label for="modalfak" class="btn">Tutup</label>
+                  </div>
+               </form>
+            </div>
          </div>
-         <div class="stat-desc text-primary hover:text-gray-800 hover:font-bold cursor-pointer">Tambah Data</div>
+
       </div>
+      {{-- Stat Fakultas End --}}
       <div class="stat">
          <div class="stat-figure text-secondary">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-door-open"
@@ -112,4 +172,5 @@
          </div>
       </div>
    </div>
+
 </div>

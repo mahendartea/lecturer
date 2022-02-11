@@ -9,50 +9,81 @@ use Livewire\WithPagination;
 
 class PtnManage extends Component
 {
-  use WithPagination;
+    use WithPagination;
 
-  public $idpt;
-  public $namapt;
-  public $statuspt;
-  public $emailpt;
-  public $weblinkpt;
-  public $alamatpt;
-  public $kontakpt;
-  public $deskripsipt;
-  public $pagination = 5;
+    public $idpt;
+    public $namapt;
+    public $statuspt;
+    public $emailpt;
+    public $weblinkpt;
+    public $alamatpt;
+    public $kontakpt;
+    public $deskripsipt;
 
-  protected $listeners = [
-    'toPtnManage' => 'viewPtnManage',
-  ];
+    public $pagination = 5;
+    public $formAddFaculty;
+
+    public $kodefak;
+    public $namafak;
+
+    protected $listeners = [
+        'toPtnManage' => 'viewPtnManage',
+    ];
 
 
-  public function viewPtnManage($dataManagePt)
-  {
-    $this->idpt = $dataManagePt['id'];
-    $this->namapt = $dataManagePt['nama_universitas'];
-    $this->statuspt = $dataManagePt['statuspt'];
-    $this->emailpt = $dataManagePt['email'];
-    $this->weblinkpt = $dataManagePt['weblink'];
-    $this->alamatpt = $dataManagePt['alamat'];
-    $this->kontakpt = $dataManagePt['kontak'];
-    $this->deskripsipt = $dataManagePt['description'];
-  }
+    public function viewPtnManage($dataManagePt)
+    {
+        $this->idpt = $dataManagePt['id'];
+        $this->namapt = $dataManagePt['nama_universitas'];
+        $this->statuspt = $dataManagePt['statuspt'];
+        $this->emailpt = $dataManagePt['email'];
+        $this->weblinkpt = $dataManagePt['weblink'];
+        $this->alamatpt = $dataManagePt['alamat'];
+        $this->kontakpt = $dataManagePt['kontak'];
+        $this->deskripsipt = $dataManagePt['description'];
+    }
 
-  public function render()
-  {
-    $fakulties = Faculty::where('dataptn_id', $this->idpt);
-    $jumlahfakulties = count($fakulties->with('studyprogram')->get());
-    $jmlProdi = count($fakulties->with('studyprogram')->get()->pluck('studyprogram')->flatten()->unique('id'));
-    $jmlDosen = count(User::where('id_pt', $this->idpt)->where('role_id', 3)->get());
-    $dataFukultas = $fakulties->with('studyprogram')->get();
-    $dataDosen = User::where('id_pt', $this->idpt)->where('role_id', 3)->paginate($this->pagination);
+    public function render()
+    {
+        $fakulties = Faculty::where('dataptn_id', $this->idpt);
+        $jumlahfakulties = count($fakulties->with('studyprogram')->get());
+        $jmlProdi = count($fakulties->with('studyprogram')->get()->pluck('studyprogram')->flatten()->unique('id'));
+        $jmlDosen = count(User::where('id_pt', $this->idpt)->where('role_id', 3)->get());
+        $dataFukultas = $fakulties->with('studyprogram')->get();
+        $dataDosen = User::where('id_pt', $this->idpt)->where('role_id', 3)->paginate($this->pagination);
 
-    return view('livewire.admin.ptns.ptn-manage', [
-      'faculties' => $dataFukultas,
-      'jmlfakultas' => $jumlahfakulties,
-      'jmlprodi' => $jmlProdi,
-      'jmldosen' => $jmlDosen,
-      'dataDosen' => $dataDosen,
-    ]);
-  }
+        return view('livewire.admin.ptns.ptn-manage', [
+            'faculties' => $dataFukultas,
+            'jmlfakultas' => $jumlahfakulties,
+            'jmlprodi' => $jmlProdi,
+            'jmldosen' => $jmlDosen,
+            'dataDosen' => $dataDosen,
+        ]);
+    }
+
+    protected $rules = [
+        'kodefak' => 'required|min:3',
+        'namafak' => 'required|min:3|max:50|string',
+    ];
+
+    public function messages()
+    {
+        return [
+            'kodefak.required' => 'Harus input kode fakultas..',
+            'kodefak.max' => 'Kode Matakuliah minimal 3 karakter..',
+            'namafak.required' => 'Harus input nama fakultas..',
+            'namafak.min' => 'Nama makul minimal 3 karakter..',
+        ];
+    }
+
+    public function storefak()
+    {
+        $this->validate();
+        $addfakulties = Faculty::create([
+            'dataptn_id' => $this->idpt,
+            'faculty_code' => $this->kodefak,
+            'faculty_name' => $this->namafak,
+        ]);
+        session()->flash('message', 'Berhasil ditambahkan..!');
+    }
 }
