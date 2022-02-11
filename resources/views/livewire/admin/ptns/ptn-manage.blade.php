@@ -33,17 +33,18 @@
             class="stat-desc text-primary hover:text-gray-800 hover:font-bold cursor-pointer modal-button">Tambah
             Fakultas</label>
          <input type="checkbox" id="modalfak" class="modal-toggle" hidden>
+         {{-- modal fak show --}}
          <div class="modal">
             <div class="modal-box">
                <form wire:submit.prevent="storefak">
                   @csrf
-                  <div>
+                  <div class="flex justify-between">
                      <h1 class="text-lg">Tambah Fakultas </h1>
-                     <p class="text-xs font-bold"> {{ $namapt }} </p>
+                     <span class="text-xs font-bold"> {{ $namapt }} </span>
                   </div>
                   <hr />
                   <div class="mt-3">
-                     <input type="text" wire:model={{ $idpt }} hidden>
+                     <input type="text" wire:model={{ $idpt }} placeholder="{{ $idpt }}" hidden>
                      <div class="form-control">
                         <label class="label">
                            <span class="label-text">Kode Fakultas</span>
@@ -66,10 +67,10 @@
                      </div>
                   </div>
                   <div class="modal-action">
-                     <label for="modalfak" class=""></label>
+                     <label for="modalfak"></label>
                      @if (session('message'))
-                        <div class="alert alert-info my-0 mx-1 px-1 py-0" x-data="{show: true}"
-                           x-init="setTimeout(() => show = false, 5000)" x-show="show">
+                        <div class="alert alert-info my-0 mx-1 px-1 py-0 w-full" x-data="{show: true}"
+                           x-init="setTimeout(() => show = false, 3000)" x-show="show">
                            <div class="flex-1">
                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#009688"
                                  class="flex-shrink-0 w-6 h-6 mx-2">
@@ -81,16 +82,16 @@
                            </div>
                         </div>
                      @endif
-                     <button class="font-bold uppercase btn btn-primary" type="submit"
-                        @if (session('message')) disabled @endif>Tambah</button>
+                     <button for="modalfak" class="font-bold uppercase btn btn-primary" type="submit">Tambah</button>
                      <label for="modalfak" class="btn">Tutup</label>
                   </div>
                </form>
             </div>
          </div>
-
       </div>
       {{-- Stat Fakultas End --}}
+
+      {{-- Stat Prodi --}}
       <div class="stat">
          <div class="stat-figure text-secondary">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-door-open"
@@ -105,7 +106,83 @@
             Program Studi
          </div>
          <div class="stat-value">{{ $jmlprodi }}</div>
-         <div class="stat-desc text-primary hover:text-gray-800 hover:font-bold cursor-pointer">Tambah Data</div>
+         {{-- <div class="stat-desc text-primary hover:text-gray-800 hover:font-bold cursor-pointer">Tambah Data</div> --}}
+         <label for="modalpro"
+            class="stat-desc text-primary hover:text-gray-800 hover:font-bold cursor-pointer modal-button">Tambah
+            Prodi</label>
+         <input type="checkbox" id="modalpro" class="modal-toggle" hidden>
+         {{-- modal form --}}
+
+         <div class="modal">
+            <div class="modal-box">
+               <form wire:submit.prevent="storepro">
+                  @csrf
+                  <div class="flex justify-between">
+                     <h1 class="text-lg">Tambah Prodi </h1>
+                     <span class="text-xs font-bold"> {{ $namapt }} </span>
+                  </div>
+                  <hr />
+                  <div class="mt-3">
+                     <input type="text" wire:model={{ $idpt }} placeholder="{{ $idpt }}" hidden>
+                     <div class="form-control">
+                        <label class="label">
+                           <span class="label-text">Kode Prodi</span>
+                        </label>
+                        <input wire:model="kodepro" type="text" placeholder="Kode Program Studi"
+                           class="input input-bordered">
+                        @error('kodepro') <span
+                              class="error text-center mt-1 text-red-600 text-xs italic">{{ $message }}</span>
+                        @enderror
+                     </div>
+                     <div class="form-control">
+                        <label class="label">
+                           <span class="label-text">Nama Prodi</span>
+                        </label>
+                        <input wire:model="namapro" type="text" placeholder="Nama Program Studi"
+                           class="input input-bordered">
+                        @error('namapro') <span
+                              class="error text-center mt-1 text-red-600 text-xs italic">{{ $message }}</span>
+                        @enderror
+                     </div>
+
+                     <div class="form-control w-full mt-3">
+                        <label for="label">
+                           <span class="label-text">Pilih Fakultas</span>
+                        </label>
+                        <select class="select select-bordered w-full max-w-xs" wire:model="idfak">
+                           <option selected="selected">Pilih Fakultas</option>
+                           @foreach ($faculties as $fakul)
+                              <option value="{{ $fakul->id }}"> {{ $fakul->faculty_name }}</option>
+                           @endforeach
+                        </select>
+                        @error('idfak') <span
+                              class="error text-center mt-1 text-red-600 text-xs italic">{{ $message }}</span>
+                        @enderror
+                     </div>
+
+                  </div>
+                  <div class="modal-action">
+                     <label for="modalpro"></label>
+                     @if (session('message'))
+                        <div class="alert alert-info my-0 mx-1 px-1 py-0 w-full" x-data="{show: true}"
+                           x-init="setTimeout(() => show = false, 3000)" x-show="show">
+                           <div class="flex-1">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#009688"
+                                 class="flex-shrink-0 w-6 h-6 mx-2">
+                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
+                                 </path>
+                              </svg>
+                              <label>{{ session('message') }}</label>
+                           </div>
+                        </div>
+                     @endif
+                     <button for="modalpro" class="font-bold uppercase btn btn-primary" type="submit">Tambah</button>
+                     <label for="modalpro" class="btn">Tutup</label>
+                  </div>
+               </form>
+            </div>
+         </div>
       </div>
       <div class="stat">
          <div class="stat-figure text-secondary">
@@ -123,6 +200,7 @@
          <div class="stat-desc text-primary hover:text-gray-800 hover:font-bold cursor-pointer">Tambah Data</div>
       </div>
    </div>
+   {{-- Stat Prodi End --}}
 
    <hr />
 

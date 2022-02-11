@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin\Ptns;
 
 use App\Models\Faculty;
+use App\Models\StudyProgram;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -25,6 +26,9 @@ class PtnManage extends Component
 
     public $kodefak;
     public $namafak;
+    public $kodepro;
+    public $namapro;
+    public $idfak;
 
     protected $listeners = [
         'toPtnManage' => 'viewPtnManage',
@@ -61,29 +65,50 @@ class PtnManage extends Component
         ]);
     }
 
-    protected $rules = [
-        'kodefak' => 'required|min:3',
-        'namafak' => 'required|min:3|max:50|string',
-    ];
+    // protected $rules = [
+    //     'kodefak' => 'required|min:3',
+    //     'namafak' => 'required|min:3|max:50|string',
+    //     // 'kodepro' => 'required|min:3',
+    //     // 'namapro' => 'required|min:3|max:50|string',
+    //     // 'idfak' => 'required',
+    // ];
 
-    public function messages()
-    {
-        return [
-            'kodefak.required' => 'Harus input kode fakultas..',
-            'kodefak.max' => 'Kode Matakuliah minimal 3 karakter..',
-            'namafak.required' => 'Harus input nama fakultas..',
-            'namafak.min' => 'Nama makul minimal 3 karakter..',
-        ];
-    }
+    // public function messages()
+    // {
+    //     return [
+    //         'kodefak.required' => 'Harus input kode fakultas..',
+    //         'kodefak.min' => 'Kode Matakuliah minimal 3 karakter..',
+    //         'namafak.required' => 'Harus input nama fakultas..',
+    //         'namafak.min' => 'Nama makul minimal 3 karakter..',
+    //         // 'kodepro.required' => 'Harus input kode prodi..',
+    //         // 'kodepro.min' => 'Kode prodi minimal 3 karakter..',
+    //         // 'namapro.required' => 'Harus input nama prodi..',
+    //         // 'namapro.min' => 'Nama prodi minimal 3 karakter..',
+    //         // 'idfak.required' => 'Harus Pilih fakultas..',
+    //     ];
+    // }
 
     public function storefak()
     {
-        $this->validate();
+        // $this->validate();
         $addfakulties = Faculty::create([
             'dataptn_id' => $this->idpt,
             'faculty_code' => $this->kodefak,
             'faculty_name' => $this->namafak,
         ]);
+        session()->flash('message', 'Berhasil ditambahkan..!');
+    }
+
+    public function storepro()
+    {
+        // $this->validate();
+        $addprodi = StudyProgram::create([
+            'faculty_id' => $this->idfak,
+            'kode_prodi' => $this->kodepro,
+            'prodi_name' => $this->namapro,
+            'dataptn_id' => $this->idpt,
+        ]);
+
         session()->flash('message', 'Berhasil ditambahkan..!');
     }
 }
