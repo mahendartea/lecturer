@@ -224,6 +224,9 @@
                </div>
             </div>
          @endforeach
+         <div class="pt-5">
+            {{ $faculties->links() }}
+         </div>
       </div>
 
       <div class="ml-3 w-1/2 rounded-md">

@@ -60,6 +60,7 @@
    @endif
 
    <div class="my-5 bg-white p-10 rounded-lg shadow-xl">
+     
       @switch($ptnsStatus)
          @case(1)
             <livewire:admin.ptns.ptns-index />
