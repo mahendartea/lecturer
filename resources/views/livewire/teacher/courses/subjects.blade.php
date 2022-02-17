@@ -74,13 +74,13 @@
          </tbody>
       </table>
 
-   @else
-      <div class="text-primary">Silahkan pilih Tahun Ajar terlebih dahulu...</div>
-   @endif
+      <div class="pt-5">
+         {{ $subjects->links() }}
+      </div>
 
-   <div class="pt-5">
-      {{ $subjects->links() }}
-   </div>
+   @else
+      <div class="text-primary mt-10"> 👈🏾 Silahkan pilih Tahun Ajar terlebih dahulu..!</div>
+   @endif
 
    {{-- Modal Tambah Matakuliah --}}
    @if ($statusFormCourse)
