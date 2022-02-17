@@ -37,15 +37,15 @@
 
             @foreach ($subjects as $subject)
                <tr>
-                  <td class="py-2 text-base-content bg-base-200 text-sm">{{ $no++ }}</td>
-                  <td class="text-base-content bg-base-200 text-sm">{{ $subject->code_course }}</td>
-                  <td class="text-base-content bg-base-200 text-sm">{{ $subject->name_course }}</td>
-                  <td class="text-base-content bg-base-200 text-sm">{{ $subject->class }}</td>
-                  <td class="text-base-content bg-base-200 text-sm">{{ $subject->courseyear->ket_tahun_ajar }}</td>
-                  <td class="text-base-content bg-base-200 text-sm">{{ $subject->studyprogram->prodi_name }}</td>
+                  <td class="py-2 text-base-content bg-base-200 text-xs">{{ $no++ }}</td>
+                  <td class="text-base-content bg-base-200 text-xs">{{ $subject->code_course }}</td>
+                  <td class="text-base-content bg-base-200 text-xs">{{ $subject->name_course }}</td>
+                  <td class="text-base-content bg-base-200 text-xs">{{ $subject->class }}</td>
+                  <td class="text-base-content bg-base-200 text-xs">{{ $subject->courseyear->ket_tahun_ajar }}</td>
+                  <td class="text-base-content bg-base-200 text-xs">{{ $subject->studyprogram->prodi_name }}</td>
                   <td class="text-base-content bg-base-200">
                      <div class="flex space-x-3 items-center">
-                        <div class="text-sm cursor-pointer tooltip" data-tip="ubah"
+                        <div class="text-xs cursor-pointer tooltip" data-tip="ubah"
                            wire:click="editSubject({{ $subject->id }})">
                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                               class="w-5" stroke="currentColor">
@@ -54,7 +54,7 @@
                            </svg>
                         </div>
                         <div wire:click="showDeleteSubjectItem({{ $subject->id }})"
-                           class="text-sm cursor-pointer tooltip" data-tip="hapus">
+                           class="text-xs cursor-pointer tooltip" data-tip="hapus">
                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                               class="w-5" stroke="currentColor">
                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
