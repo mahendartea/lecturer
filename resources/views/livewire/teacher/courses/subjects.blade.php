@@ -2,15 +2,21 @@
    <div class="flex mx-5 justify-between items-center">
       <h1 class="my-5 font-bold text-neutral">Daftar Matakuliah {{ $ta->ket_tahun_ajar }}</h1>
       @if (session('message'))
-         <div class="alert alert-info my-0 mx-1 px-1 py-0">
-            <div class="flex-1">
-               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#009688"
-                  class="flex-shrink-0 w-6 h-6 mx-2">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                     d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
-                  </path>
+         <div
+            class="flex w-full max-w-sm mx-auto overflow-hidden bg-white opacity-70 rounded-lg shadow-md absolute top-2 right-5"
+            x-data="{show: true}" x-init="setTimeout(() => show = false, 3000)" x-show="show">
+            <div class="flex items-center justify-center w-12 bg-green-500">
+               <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                     d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z" />
                </svg>
-               <label>{{ session('message') }}</label>
+            </div>
+
+            <div class="px-4 py-2 -mx-3">
+               <div class="mx-3">
+                  <span class="font-semibold text-green-500 ">Berhasil...</span>
+                  <p class="text-sm text-gray-600">{{ session('message') }}</p>
+               </div>
             </div>
          </div>
       @endif
