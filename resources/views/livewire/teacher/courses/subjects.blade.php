@@ -89,21 +89,21 @@
 
                <div class="form-control" wire:model="coursecode">
                   <label class="label">
-                     <span class="label-text">Kode MK</span>
+                     <span class="label-text">Kode MataKuliah</span>
                   </label>
                   <input type="text" placeholder="Masukan kode matakuliah" class="input input-bordered">
-                  @error('coursecode') <span
-                        class="error text-center mt-1 text-red-600 text-xs italic">{{ $message }}</span>
+                  @error('coursecode')
+                     <span class="error text-center mt-1 text-red-600 text-xs italic">{{ $message }}</span>
                   @enderror
                </div>
 
                <div class="form-control" wire:model="coursename">
                   <label class="label">
-                     <span class="label-text">Nama MK</span>
+                     <span class="label-text">Nama MataKuliah</span>
                   </label>
                   <input type="text" placeholder="Masukan nama matakuliah" class="input input-bordered">
-                  @error('coursename') <span
-                        class="error text-center mt-1 text-red-600 text-xs italic">{{ $message }}</span>
+                  @error('coursename')
+                     <span class="error text-center mt-1 text-red-600 text-xs italic">{{ $message }}</span>
                   @enderror
                </div>
 
@@ -112,24 +112,41 @@
                      <span class="label-text">Kelas</span>
                   </label>
                   <input type="text" placeholder="Masukan Kelas" class="input input-bordered">
-                  @error('cls') <span
-                        class="error text-center mt-1 text-red-600 text-xs italic">{{ $message }}</span>
+                  @error('cls')
+                     <span class="error text-center mt-1 text-red-600 text-xs italic">{{ $message }}</span>
                   @enderror
                </div>
 
-               <div class="form-control">
-                  <label class="label">
-                     <span class="label-text">Pilih Tahun Ajar</span>
-                  </label>
-                  <select wire:model="courseyear" class="select select-bordered w-full max-w-xs">
-                     <option selected="selected">Pilih TA Makul ini...</option>
-                     @foreach ($talist as $tlist)
-                        <option value="{{ $tlist->id }}">{{ $tlist->ket_tahun_ajar }}</option>
-                     @endforeach
-                  </select>
-                  @error('courseyear') <span
-                        class="error text-center mt-1 text-red-600 text-xs italic">{{ $message }}</span>
-                  @enderror
+               <div class="flex items-center justify-between my-2">
+                  <div class="w-1/2 form-control px-1">
+                     <label class="label">
+                        <span class="label-text">Pilih Tahun Ajar</span>
+                     </label>
+                     <select wire:model="courseyear" class="select select-bordered w-full max-w-xs">
+                        <option selected="selected">Pilih TA Makul ini...</option>
+                        @foreach ($talist as $tlist)
+                           <option value="{{ $tlist->id }}">{{ $tlist->ket_tahun_ajar }}</option>
+                        @endforeach
+                     </select>
+                     @error('courseyear')
+                        <span class="error text-center mt-1 text-red-600 text-xs italic">{{ $message }}</span>
+                     @enderror
+                  </div>
+
+                  <div class="w-1/2 form-control px-1">
+                     <label class="label">
+                        <span class="label-text">Pilih Program Studi</span>
+                     </label>
+                     <select wire:model="courseprodi" class="select select-bordered w-full max-w-xs">
+                        <option selected="selected">Pilih Program Studi MK Ini...</option>
+                        @foreach ($prodies as $prodi)
+                           <option value="{{ $prodi->id }}">{{ $prodi->prodi_name }}</option>
+                        @endforeach
+                     </select>
+                     @error('courseprodi')
+                        <span class="error text-center mt-1 text-red-600 text-xs italic">{{ $message }}</span>
+                     @enderror
+                  </div>
                </div>
 
             </x-slot>
@@ -166,8 +183,8 @@
                   </label>
                   <input type="text" placeholder="Masukan kode matakuliah" class="input input-bordered"
                      value={{ $coursecode }}>
-                  @error('coursecode') <span
-                        class="error text-center mt-1 text-red-600 text-xs italic">{{ $message }}</span>
+                  @error('coursecode')
+                     <span class="error text-center mt-1 text-red-600 text-xs italic">{{ $message }}</span>
                   @enderror
                </div>
 
@@ -177,8 +194,8 @@
                   </label>
                   <input type="text" placeholder="Masukan nama matakuliah" class="input input-bordered"
                      value="{{ $coursename }}">
-                  @error('coursename') <span
-                        class="error text-center mt-1 text-red-600 text-xs italic">{{ $message }}</span>
+                  @error('coursename')
+                     <span class="error text-center mt-1 text-red-600 text-xs italic">{{ $message }}</span>
                   @enderror
                </div>
 
@@ -188,24 +205,40 @@
                   </label>
                   <input type="text" placeholder="Masukan Kelas" class="input input-bordered"
                      value="{{ $cls }}">
-                  @error('cls') <span
-                        class="error text-center mt-1 text-red-600 text-xs italic">{{ $message }}</span>
+                  @error('cls')
+                     <span class="error text-center mt-1 text-red-600 text-xs italic">{{ $message }}</span>
                   @enderror
                </div>
 
-               <div class="form-control">
-                  <label class="label">
-                     <span class="label-text">Pilih Tahun Ajar</span>
-                  </label>
-                  <select wire:model="courseyear" class="select select-bordered w-full max-w-xs">
-                     <option selected="selected" value={{ $courseyear }}>{{ $ta->ket_tahun_ajar }}</option>
-                     {{-- @foreach ($talist as $tlist)
-                        <option value="{{ $tlist->id }}">{{ $tlist->ket_tahun_ajar }}</option>
-                     @endforeach --}}
-                  </select>
-                  @error('courseyear') <span
-                        class="error text-center mt-1 text-red-600 text-xs italic">{{ $message }}</span>
-                  @enderror
+               <div class="flex items-center justify-between">
+                  <div class="form-control mx-1 w-1/2">
+                     <label class="label">
+                        <span class="label-text">Pilih Tahun Ajar</span>
+                     </label>
+                     <select wire:model="courseyear" class="select select-bordered w-full max-w-xs">
+                        <option selected="selected" value={{ $courseyear }}>{{ $ta->ket_tahun_ajar }}</option>
+                     </select>
+                     @error('courseyear')
+                        <span class="error text-center mt-1 text-red-600 text-xs italic">{{ $message }}</span>
+                     @enderror
+                  </div>
+
+                  <div class="form-control mx-1 w-1/2">
+                     <label class="label">
+                        <span class="label-text">Pilih Program Studi</span>
+                     </label>
+                     <select wire:model="courseprodi" class="select select-bordered w-full max-w-xs">
+                        <option selected="selected" value={{ $courseprodi }}>{{ $nameProdi }} (Selected)</option>
+                        @foreach ($listprodies as $pro)
+                           <option value={{ $pro->id }}>
+                              {{ $pro->prodi_name }}
+                           </option>
+                        @endforeach
+                     </select>
+                     @error('courseprodi')
+                        <span class="error text-center mt-1 text-red-600 text-xs italic">{{ $message }}</span>
+                     @enderror
+                  </div>
                </div>
 
             </x-slot>

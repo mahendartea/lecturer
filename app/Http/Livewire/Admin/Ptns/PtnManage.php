@@ -21,8 +21,6 @@ class PtnManage extends Component
     public $kontakpt;
     public $deskripsipt;
 
-    public $paginationOne = 3;
-    public $paginationTwo = 3;
     public $formAddFaculty;
 
     public $kodefak;
@@ -56,8 +54,8 @@ class PtnManage extends Component
         $jumlahfakulties = count($fakulties->with('studyprogram')->get());
         $jmlProdi = count($fakulties->with('studyprogram')->get()->pluck('studyprogram')->flatten()->unique('id'));
         $jmlDosen = count(User::where('id_pt', $this->idpt)->where('role_id', 3)->get());
-        $dataFukultas = $fakulties->with('studyprogram')->paginate($this->paginationOne, ['*'], 'fakulties');
-        $dataDosen = User::where('id_pt', $this->idpt)->where('role_id', 3)->paginate($this->paginationTwo, ['*'], 'dosen');
+        $dataFukultas = $fakulties->with('studyprogram')->paginate(3, ['*'], 'fakulties');
+        $dataDosen = User::where('id_pt', $this->idpt)->where('role_id', 3)->paginate(5, ['*'], 'dosen');
 
         return view('livewire.admin.ptns.ptn-manage', [
             'faculties' => $dataFukultas,
