@@ -30,6 +30,8 @@ class PtnManage extends Component
     public $kodepro;
     public $namapro;
     public $idfak;
+    public $nidn;
+    public $namados;
 
     protected $listeners = [
         'toPtnManage' => 'viewPtnManage',
@@ -108,6 +110,20 @@ class PtnManage extends Component
             'kode_prodi' => $this->kodepro,
             'prodi_name' => $this->namapro,
             'dataptn_id' => $this->idpt,
+        ]);
+
+        session()->flash('message', 'Berhasil ditambahkan..!');
+    }
+
+    public function storedos()
+    {
+        // $this->validate();
+        $adddosen = User::create([
+            'id_pt' => $this->idpt,
+            'name' => $this->namados,
+            'teacher_nidn' => $this->nidn,
+            'password' => bcrypt('12345678'),
+            'role_id' => 3,
         ]);
 
         session()->flash('message', 'Berhasil ditambahkan..!');
