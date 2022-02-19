@@ -30,7 +30,7 @@ class UsersEdit extends Component
    public function render()
    {
       $this->allptn = DB::table('dataptns')->get();
-      return view('livewire.admin.users.users-edit', compact($this->allptn));
+      return view('livewire.admin.users.users-edit', ['allptn' => $this->allptn]);
    }
 
    protected $rules = [

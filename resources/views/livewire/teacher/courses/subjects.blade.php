@@ -3,7 +3,7 @@
       <h1 class="my-5 font-bold text-neutral">Daftar Matakuliah {{ $ta->ket_tahun_ajar }}</h1>
       @if (session('message'))
          <div
-            class="flex w-full max-w-sm mx-auto overflow-hidden bg-white opacity-70 rounded-lg shadow-md absolute top-2 right-5"
+            class="flex w-full max-w-sm mx-auto overflow-hidden bg-white opacity-90 rounded-lg shadow-lg absolute top-8 right-5 transition delay-300 duration-150"
             x-data="{show: true}" x-init="setTimeout(() => show = false, 3000)" x-show="show">
             <div class="flex items-center justify-center w-12 bg-green-500">
                <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
